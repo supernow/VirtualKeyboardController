@@ -22,39 +22,39 @@ public class VirtualKeyboardController {
 
     public void setLayoutManager(LayoutManager layoutManager) {
         mLayoutManager = layoutManager;
-        mLayoutManager.mEmojiKeyboardView.setVisibility(View.GONE);
+        mLayoutManager.mVirtualKeyboardView.setVisibility(View.GONE);
         mLayoutManager.addOnGlobalLayoutListener();
     }
 
-    public void showEmojiKeyboard() {
+    public void showVirtualKeyboard() {
         if (mLayoutManager.mFocusView != null) {
             IMMUtils.hideSoftInput(mContext, mLayoutManager.mFocusView);
         }
 
-        mLayoutManager.showEmojiKeyboardView();
+        mLayoutManager.showVirtualKeyboardView();
     }
 
-    public void hideEmojiKeyboard() {
-        hideEmojiKeyboard(true);
+    public void hideVirtualKeyboard() {
+        hideVirtualKeyboard(true);
     }
 
-    public void hideEmojiKeyboard(boolean shouldShowSoftInput) {
+    public void hideVirtualKeyboard(boolean shouldShowSoftInput) {
         if (mLayoutManager.mFocusView != null && shouldShowSoftInput) {
             IMMUtils.showSoftInput(mContext, mLayoutManager.mFocusView);
         }
 
-        mLayoutManager.hideEmojiKeyboardView(!shouldShowSoftInput);
+        mLayoutManager.hideVirtualKeyboardView(!shouldShowSoftInput);
     }
 
-    public boolean isEmojiKeyboardShown() {
-        return mLayoutManager.isEmojiKeyboardViewShown();
+    public boolean isVirtualKeyboardShown() {
+        return mLayoutManager.isVirtualKeyboardViewShown();
     }
 
-    public void toggleEmojiKeyboard() {
-        if (isEmojiKeyboardShown()) {
-            hideEmojiKeyboard();
+    public void toggleVirtualKeyboard() {
+        if (isVirtualKeyboardShown()) {
+            hideVirtualKeyboard();
         } else {
-            showEmojiKeyboard();
+            showVirtualKeyboard();
         }
     }
 
@@ -62,7 +62,7 @@ public class VirtualKeyboardController {
         private Context mContext;
         private View mContentView;
         private View mFocusView;
-        private View mEmojiKeyboardView;
+        private View mVirtualKeyboardView;
 
         public LayoutManager(Context context) {
             mContext = context;
@@ -88,52 +88,52 @@ public class VirtualKeyboardController {
             return mFocusView;
         }
 
-        public void setEmojiKeyboardView(View view) {
-            mEmojiKeyboardView = view;
+        public void setVirtualKeyboardView(View view) {
+            mVirtualKeyboardView = view;
         }
 
-        protected View getEmojiKeyboardView() {
-            return mEmojiKeyboardView;
+        protected View getVirtualKeyboardView() {
+            return mVirtualKeyboardView;
         }
 
         public void addOnGlobalLayoutListener() {
-            mEmojiKeyboardView.getViewTreeObserver()
+            mVirtualKeyboardView.getViewTreeObserver()
                     .addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
-                            if (mEmojiKeyboardView != null && !isEmojiKeyboardViewShown()) {
-                                onEmojiKeyboardViewHide();
+                            if (mVirtualKeyboardView != null && !isVirtualKeyboardViewShown()) {
+                                onVirtualKeyboardViewHide();
                             }
                         }
                     });
         }
 
-        void showEmojiKeyboardView() {
-            onEmojiKeyboardViewShow();
+        void showVirtualKeyboardView() {
+            onVirtualKeyboardViewShow();
 
-            LayoutParams layoutParams = mEmojiKeyboardView.getLayoutParams();
-            layoutParams.height = getEmojiKeyboardHeight();
-            mEmojiKeyboardView.setLayoutParams(layoutParams);
-            mEmojiKeyboardView.setVisibility(View.VISIBLE);
+            LayoutParams layoutParams = mVirtualKeyboardView.getLayoutParams();
+            layoutParams.height = getVirtualKeyboardHeight();
+            mVirtualKeyboardView.setLayoutParams(layoutParams);
+            mVirtualKeyboardView.setVisibility(View.VISIBLE);
         }
 
-        protected abstract int getEmojiKeyboardHeight();
+        protected abstract int getVirtualKeyboardHeight();
 
-        protected abstract void onEmojiKeyboardViewShow();
+        protected abstract void onVirtualKeyboardViewShow();
 
-        void hideEmojiKeyboardView(boolean restoreContentLayoutParams) {
-            mEmojiKeyboardView.getLayoutParams().height = 0;
+        void hideVirtualKeyboardView(boolean restoreContentLayoutParams) {
+            mVirtualKeyboardView.getLayoutParams().height = 0;
             if (restoreContentLayoutParams) {
-                onEmojiKeyboardViewHide();
+                onVirtualKeyboardViewHide();
                 mContentView.requestLayout();
             }
         }
 
-        protected abstract void onEmojiKeyboardViewHide();
+        protected abstract void onVirtualKeyboardViewHide();
 
-        boolean isEmojiKeyboardViewShown() {
-            //return mEmojiKeyboardView.getLayoutParams().height > 0;
-            return mEmojiKeyboardView.isShown() && mEmojiKeyboardView.getHeight() > 0;
+        boolean isVirtualKeyboardViewShown() {
+            //return mVirtualKeyboardView.getLayoutParams().height > 0;
+            return mVirtualKeyboardView.isShown() && mVirtualKeyboardView.getHeight() > 0;
         }
     }
 }

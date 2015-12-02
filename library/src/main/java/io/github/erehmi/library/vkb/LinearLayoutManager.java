@@ -20,12 +20,12 @@ public class LinearLayoutManager extends VirtualKeyboardController.LayoutManager
     }
 
     @Override
-    protected int getEmojiKeyboardHeight() {
+    protected int getVirtualKeyboardHeight() {
         return mSoftKeyboardCompat.getSuggestedHeight(getFocusView());
     }
 
     @Override
-    protected void onEmojiKeyboardViewShow() {
+    protected void onVirtualKeyboardViewShow() {
         final View contentView = getContentView();
         final View focusView = getFocusView();
         LayoutParams layoutParams = (LayoutParams) contentView.getLayoutParams();
@@ -40,7 +40,7 @@ public class LinearLayoutManager extends VirtualKeyboardController.LayoutManager
     }
 
     @Override
-    protected void onEmojiKeyboardViewHide() {
+    protected void onVirtualKeyboardViewHide() {
         final View contentView = getContentView();
         LayoutParams layoutParams = (LayoutParams) contentView.getLayoutParams();
         layoutParams.weight = 1.0f;

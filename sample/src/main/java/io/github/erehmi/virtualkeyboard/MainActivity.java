@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this, mSoftKeyboardCompat);
         mLayoutManager.setContentView(mListView);
         mLayoutManager.setSoftInputFocusView(mEditText);
-        mLayoutManager.setEmojiKeyboardView(mEmojiLayout);
+        mLayoutManager.setVirtualKeyboardView(mEmojiLayout);
         mVirtualKeyboardController.setLayoutManager(mLayoutManager);
     }
 
@@ -75,15 +75,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (!hideEmojiKeyboardIfNeeded(false)) {
+        if (!hideVirtualKeyboardIfNeeded(false)) {
             IMMUtils.hideSoftInput(this, mEditText);
         }
         return false;
     }
 
-    private boolean hideEmojiKeyboardIfNeeded(boolean shouldShowSoftInput) {
-        if (mVirtualKeyboardController.isEmojiKeyboardShown()) {
-            mVirtualKeyboardController.hideEmojiKeyboard(shouldShowSoftInput);
+    private boolean hideVirtualKeyboardIfNeeded(boolean shouldShowSoftInput) {
+        if (mVirtualKeyboardController.isVirtualKeyboardShown()) {
+            mVirtualKeyboardController.hideVirtualKeyboard(shouldShowSoftInput);
             return true;
         }
         return false;
@@ -93,18 +93,18 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
         case android.R.id.input:
-            hideEmojiKeyboardIfNeeded(true);
+            hideVirtualKeyboardIfNeeded(true);
             break;
 
         case R.id.emoji:
-            mVirtualKeyboardController.toggleEmojiKeyboard();
+            mVirtualKeyboardController.toggleVirtualKeyboard();
             break;
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (!hideEmojiKeyboardIfNeeded(false)) {
+        if (!hideVirtualKeyboardIfNeeded(false)) {
             super.onBackPressed();
         }
     }
