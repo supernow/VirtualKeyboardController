@@ -36,7 +36,7 @@ public class LinearLayoutManager extends VirtualKeyboardController.LayoutManager
         layoutParams.weight = 0f;
 
         // DON'T call setLayoutParams(...) immediately!!!
-        // EmojiKeyboardStateHelper.LayoutManager will call setLayoutParams(...) for you.
+        // VirtualKeyboardController.LayoutManager will call setLayoutParams(...) for you.
     }
 
     @Override
@@ -47,6 +47,6 @@ public class LinearLayoutManager extends VirtualKeyboardController.LayoutManager
         layoutParams.height = 0;
 
         // DON'T call setLayoutParams(...) immediately!!!
-        // EmojiKeyboardStateHelper.LayoutManager will call setLayoutParams(...) for you.
+        // VirtualKeyboardController.LayoutManager will call setLayoutParams(...) for you.
     }
 }
