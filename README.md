@@ -1,0 +1,3 @@
+# VirtualKeyboardController
+Android自定义虚拟软键盘状态控制组件
+主要用于切换输入法键盘和自定义虚拟键盘(如Emoji键盘)的显示和隐藏
